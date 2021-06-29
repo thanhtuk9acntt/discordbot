@@ -1,4 +1,4 @@
-const bot_token = 'ODUzOTI1NTczNDY5NDA1MjA1.YMceKQ.BakQF6DqC4tH4cgcbUwacPw8Q4o';
+const bot_token = 'ODUzOTI1NTczNDY5NDA1MjA1.YMceKQ.be_cjaERYIqeB5aPQssDDx0wkBU';
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const disbut = require('discord-buttons');

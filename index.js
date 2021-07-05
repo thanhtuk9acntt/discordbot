@@ -1,4 +1,4 @@
-const bot_token = 'ODUzOTI1NTczNDY5NDA1MjA1.YMceKQ.RpVCVdLV2eLbDhJWzpd24aJaJK8';
+const bot_token = 'ODUzOTI5MzY0NDYyMzcwODI2.YMchsQ.iWh_qgpSfIzYl7DUJRJMBPVyEmI';
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const disbut = require('discord-buttons');
@@ -25,8 +25,8 @@ let telegramButton = new disbut.MessageButton()
 
   let row = new disbut.MessageActionRow().addComponent(homePageButton).addComponent(telegramButton).addComponent(twitterButton).addComponent(discordButton);
   let setting = {
-	GuildChannelId : '855309934149632010',
-	GuildChannelWelcomeMessage : 'Welcome to Luna Yield Lobby!',
+	GuildChannelId : '859657597992304651',
+	GuildChannelWelcomeMessage : 'Welcome  to Luna Yield Lobby!',
 	EnableAttachment: false,
 	ReplyAttachmentMessage: "Not allow send url or image into here!!",
 	EnableURL: false,
@@ -47,7 +47,9 @@ client.on('interaction', async interaction => {
 
 client.login(bot_token);
 client.on('guildMemberAdd', member => {
-  member.guild.channels.cache.get(setting.GuildChannelId).send(setting.GuildChannelWelcomeMessage,{ component: row }); 
+ var channel = member.guild.channels.cache.get(setting.GuildChannelId);
+ var user = member.user;
+ 	channel.send('Welcome <@!' +user.id +'> to Luna Yield Lobby!' , { component: row }); 
 });
 
 client.on('message', async message => {
@@ -61,7 +63,15 @@ client.on('message', async message => {
       message.reply('Hi');
       return;
     }
-		if(message.content.startsWith('!edit'))
+	if(message.content === '!ok'){
+			var user = message.author;
+			
+			return message.channel.send('Hi <@!' +user.id +'>');
+		//	message.channel.send('ok' + `${user.username}`);
+		
+	  }
+
+	if(message.content.startsWith('!edit'))
 		if(CheckRoles(message, 'Admin')){
 			var str = message.content;
 			str = str.replace(/  +/g, ' ');
@@ -138,6 +148,14 @@ client.on('message', async message => {
   }
 
   function CheckURL(str){
+
+	if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(str)) {
+       return true;
+	}
+
+	return false;
+
+
 		var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
 		  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
 		  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
